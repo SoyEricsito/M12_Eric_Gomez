@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 en Raya</title>
+    <link rel="stylesheet" href="4raya.css">
+</head>
+
+<body>
+    <h1>4 en Raya</h1>
+
+    <!-- Cambiamos el ID y nombres del formulario al español -->
+    <form id="formularioJugadores">
+        <label for="jugador1">Jugador 1 (Rojo):</label>
+        <input type="text" id="jugador1" name="jugador1" required>
+        <br><br>
+        <label for="jugador2">Jugador 2 (Amarillo):</label>
+        <input type="text" id="jugador2" name="jugador2" required>
+        <br><br>
+        <label for="tamañoH">Tamaño Horizontal</label>
+        <input type="number" name="tamañoH" id="tamañoH">
+        <br><br>
+        <label for="tamañoV">Tamaño Vertical</label>
+        <input type="number" name="tamañoV" id="tamañoV">
+        <br><br>
+
+        <button type="submit">Iniciar Juego</button>
+    </form>
+
+    <!-- Contenedor del juego -->
+    <div id="contenedorJuego" style="display:none;">
+        <div id="informacionJugador">
+            <span id="jugadorActual"></span>
+        </div>
+        <!-- Tablero del juego -->
+        <div class="tablero" id="tablero"></div>
+    </div>
+
+    <script src="4raya.js"></script>
+</body>
+
+</html>
