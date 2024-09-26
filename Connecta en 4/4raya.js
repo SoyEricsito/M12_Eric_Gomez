@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const tableroElemento = document.getElementById("tablero");
     const mostrarJugadorActual = document.getElementById("jugadorActual");
     const volverAtrasBtn = document.getElementById("volverAtras");
+    const alternarNumerosBtn = document.getElementById("alternarNumeros");
+    const contenedorNumeros = document.createElement("div");
+    contenedorNumeros.id = "numerosColumnas";
 
+    let mostrarNumeros = false;
     let tamañoH;
     let tamañoV;
     let tamañoC;
@@ -16,8 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Crear el tablero
+    // Crear el tablero
     function crearTablero() {
         tableroElemento.innerHTML = ''; // Limpiar el contenido anterior
+        contenedorNumeros.innerHTML = ''; // Limpiar los números de las columnas
+
+        // Ajustar el estilo del contenedor de los números de las columnas
+        contenedorNumeros.style.display = mostrarNumeros ? 'grid' : 'none';
+        contenedorNumeros.style.gridTemplateColumns = `repeat(${tamañoH}, 50px)`; // Ajustar columnas a tamañoH
+
+        if (mostrarNumeros) {
+            // Crear números de las columnas
+            for (let col = 0; col < tamañoH; col++) {
+                const numeroColumna = document.createElement("div");
+                numeroColumna.classList.add("numeroColumna");
+                numeroColumna.textContent = col + 1; // Mostrar números desde 1
+                contenedorNumeros.appendChild(numeroColumna);
+            }
+        }
+
         for (let fila = 0; fila < tamañoV; fila++) {
             for (let col = 0; col < tamañoH; col++) {
                 const celda = document.createElement("div");
@@ -30,9 +51,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+
     // Manejar clics en las celdas
     function manejarClickCelda(evento) {
         const columna = parseInt(evento.target.dataset.columna);
+        colocarFichaEnColumna(columna);
+    }
+
+    // Buscar la primera fila disponible en una columna
+    function buscarFilaDisponible(columna) {
+        for (let fila = tamañoC; fila >= 0; fila--) {
+            if (tablero[fila][columna] === null) {
+                return fila;
+            }
+        }
+        return -1;  // Si no hay fila disponible
+    }
+
+    // Colocar ficha en una columna
+    function colocarFichaEnColumna(columna) {
         const fila = buscarFilaDisponible(columna);
 
         if (fila !== -1) {
@@ -53,16 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             console.log("Columna llena, elige otra.");
         }
-    }
-
-    // Buscar la primera fila disponible en una columna
-    function buscarFilaDisponible(columna) {
-        for (let fila = tamañoC; fila >= 0; fila--) {
-            if (tablero[fila][columna] === null) {
-                return fila;
-            }
-        }
-        return -1;  // Si no hay fila disponible
     }
 
     // Cambiar jugador
@@ -153,6 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         formulario.style.display = 'none';
         contenedorJuego.style.display = 'block';
+
+        // Añadir la fila de números encima del tablero
+        tableroElemento.parentNode.insertBefore(contenedorNumeros, tableroElemento);
+
         actualizarMostrarJugador();
         crearTablero();
     });
@@ -163,5 +194,22 @@ document.addEventListener("DOMContentLoaded", () => {
         formulario.style.display = 'block';    // Mostrar el formulario de nuevo
         reiniciarJuego();  // Opcional: reiniciar el juego si quieres empezar de cero
     });
+
+    // Botón "Mostrar Números" para mostrar/ocultar números encima del tablero
+    alternarNumerosBtn.addEventListener("click", () => {
+        mostrarNumeros = !mostrarNumeros; // Alternar estado de mostrar números
+        alternarNumerosBtn.textContent = mostrarNumeros ? 'Ocultar Números' : 'Mostrar Números';
+        crearTablero(); // Volver a crear el tablero para reflejar el cambio
+    });
+
+    // Vincular teclas del teclado con columnas
+    document.addEventListener('keydown', (evento) => {
+        const key = evento.key;
+        const columnaSeleccionada = parseInt(key) - 1; // Convertir la tecla presionada a índice de columna
+        if (columnaSeleccionada >= 0 && columnaSeleccionada < tamañoH) {
+            colocarFichaEnColumna(columnaSeleccionada);
+        }
+    });
 });
+
 

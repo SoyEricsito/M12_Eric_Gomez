@@ -3,6 +3,20 @@ body {
     text-align: center;
 }
 
+#numerosColumnas {
+    display: grid;
+    grid-template-columns: repeat(15, 50px);
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.numeroColumna {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 #tablero {
     display: grid;
     grid-template-columns: repeat(7, 50px);
