@@ -11,7 +11,7 @@
 <body>
     <h1>4 en Raya</h1>
 
-    <!-- Cambiamos el ID y nombres del formulario al español -->
+    <!-- Formulario de configuración -->
     <form id="formularioJugadores">
         <label for="jugador1">Jugador 1 (Rojo):</label>
         <input type="text" id="jugador1" name="jugador1" required>
@@ -20,10 +20,10 @@
         <input type="text" id="jugador2" name="jugador2" required>
         <br><br>
         <label for="tamañoH">Tamaño Horizontal</label>
-        <input type="number" name="tamañoH" id="tamañoH">
+        <input type="number" name="tamañoH" id="tamañoH" required>
         <br><br>
         <label for="tamañoV">Tamaño Vertical</label>
-        <input type="number" name="tamañoV" id="tamañoV">
+        <input type="number" name="tamañoV" id="tamañoV" required>
         <br><br>
 
         <button type="submit">Iniciar Juego</button>
@@ -36,6 +36,9 @@
         </div>
         <!-- Tablero del juego -->
         <div class="tablero" id="tablero"></div>
+        <br>
+        <!-- Botón para volver al formulario -->
+        <button id="volverAtras">Volver atrás</button>
     </div>
 
     <script src="4raya.js"></script>

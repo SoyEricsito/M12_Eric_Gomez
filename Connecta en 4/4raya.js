@@ -3,20 +3,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const contenedorJuego = document.getElementById("contenedorJuego");
     const tableroElemento = document.getElementById("tablero");
     const mostrarJugadorActual = document.getElementById("jugadorActual");
-    var tamañoH = document.getElementById("tamañoH");
-    var tamañoV = document.getElementById("tamañoV");
-    var tablero = Array(6).fill(null).map(() => Array(7).fill(null));
-    var jugadorActual = 'jugador1';
-    var jugadores = {
+    const volverAtrasBtn = document.getElementById("volverAtras");
+
+    let tamañoH;
+    let tamañoV;
+    let tamañoC;
+    let tablero;
+    let jugadorActual = 'jugador1';
+    const jugadores = {
         jugador1: "",
         jugador2: ""
     };
 
     // Crear el tablero
     function crearTablero() {
-        tableroElemento.innerHTML = '';
-        for (let fila = 0; fila < 6; fila++) {
-            for (let col = 0; col < 7; col++) {
+        tableroElemento.innerHTML = ''; // Limpiar el contenido anterior
+        for (let fila = 0; fila < tamañoV; fila++) {
+            for (let col = 0; col < tamañoH; col++) {
                 const celda = document.createElement("div");
                 celda.classList.add("celda");
                 celda.dataset.fila = fila;
@@ -54,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Buscar la primera fila disponible en una columna
     function buscarFilaDisponible(columna) {
-        for (let fila = 5; fila >= 0; fila--) {
+        for (let fila = tamañoC; fila >= 0; fila--) {
             if (tablero[fila][columna] === null) {
                 return fila;
             }
@@ -107,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let c = columna + direccionColumna;
 
         // Mientras estamos dentro del rango del tablero y la ficha es del jugador actual
-        while (f >= 0 && f < 6 && c >= 0 && c < 7 && tablero[f][c] === jugadorActual) {
+        while (f >= 0 && f < tamañoV && c >= 0 && c < tamañoH && tablero[f][c] === jugadorActual) {
             contador++;
             f += direccionFila;
             c += direccionColumna;
@@ -118,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Reiniciar el juego
     function reiniciarJuego() {
-        tablero = Array(6).fill(null).map(() => Array(7).fill(null));
+        tablero = Array(tamañoV).fill(null).map(() => Array(tamañoH).fill(null));
         crearTablero();
         jugadorActual = 'jugador1';
         actualizarMostrarJugador();
@@ -127,6 +130,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Configurar el juego cuando se envía el formulario
     formulario.addEventListener("submit", (evento) => {
         evento.preventDefault();
+
+        // Convertir los valores de los inputs a enteros
+        tamañoH = parseInt(document.getElementById("tamañoH").value);
+        tamañoV = parseInt(document.getElementById("tamañoV").value);
+
+        if (isNaN(tamañoH) || isNaN(tamañoV) || tamañoH <= 0 || tamañoV <= 0) {
+            alert("Por favor, ingresa un tamaño válido para el tablero.");
+            return;
+        }
+
+        // Ajustar el estilo del tablero usando grid-template-columns y grid-template-rows
+        tableroElemento.style.gridTemplateColumns = `repeat(${tamañoH}, 50px)`;
+        tableroElemento.style.gridTemplateRows = `repeat(${tamañoV}, 50px)`;
+
+        // Ajustar tamaño del tablero en el código
+        tamañoC = tamañoV - 1;
+        tablero = Array(tamañoV).fill(null).map(() => Array(tamañoH).fill(null));
+
         jugadores.jugador1 = document.getElementById("jugador1").value || "Jugador 1";
         jugadores.jugador2 = document.getElementById("jugador2").value || "Jugador 2";
 
@@ -135,4 +156,12 @@ document.addEventListener("DOMContentLoaded", () => {
         actualizarMostrarJugador();
         crearTablero();
     });
+
+    // Botón "Volver atrás" para regresar al formulario
+    volverAtrasBtn.addEventListener("click", () => {
+        contenedorJuego.style.display = 'none'; // Ocultar el contenedor del juego
+        formulario.style.display = 'block';    // Mostrar el formulario de nuevo
+        reiniciarJuego();  // Opcional: reiniciar el juego si quieres empezar de cero
+    });
 });
+
