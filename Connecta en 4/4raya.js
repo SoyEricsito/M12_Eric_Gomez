@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
     // Manejar clics en las celdas
     function manejarClickCelda(evento) {
         const columna = parseInt(evento.target.dataset.columna);
@@ -210,6 +211,68 @@ document.addEventListener("DOMContentLoaded", () => {
             colocarFichaEnColumna(columnaSeleccionada);
         }
     });
+
+    /* // Almacena si el bot está activo
+    let botActivo = false;
+
+    // Configurar el juego cuando se envía el formulario
+    formulario.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+        jugadores.jugador1 = document.getElementById("jugador1").value || "Jugador 1";
+        jugadores.jugador2 = document.getElementById("jugador2").value || "Jugador 2";
+
+        formulario.style.display = 'none';
+        contenedorJuego.style.display = 'block';
+        actualizarMostrarJugador();
+        crearTablero();
+
+        if (botActivo) {
+            jugarConBot();
+        }
+    });
+
+    // Activar o desactivar el bot
+    document.getElementById("activarBot").addEventListener("click", () => {
+        botActivo = !botActivo; // Cambiar estado del bot
+        alert(botActivo ? "Bot activado!" : "Bot desactivado!");
+    });
+
+    // Función para que el bot juegue
+    function jugarConBot() {
+        if (jugadorActual === 'jugador2' && botActivo) {
+            setTimeout(() => {
+                let columnaElegida;
+                do {
+                    columnaElegida = Math.floor(Math.random() * tamañoH);
+                } while (tablero[0][columnaElegida] !== null); // Asegúrate de que la columna no esté llena
+
+                colocarFichaEnColumna(columnaElegida); // El bot juega en la columna elegida
+                if (verificarGanador(fila, columnaElegida)) {
+                    alert(`${jugadores[jugadorActual]} ha ganado!`);
+                    reiniciarJuego();
+                    return;
+                }
+                cambiarJugador(); // Cambiar al jugador después de que el bot juega
+                jugarConBot(); // Llamar nuevamente para el siguiente turno del bot
+            }, 1000); // Retraso para simular el tiempo de pensar del bot
+        }
+    }
+
+    // Colocar ficha en columna
+    function colocarFichaEnColumna(columna) {
+        const fila = buscarFilaDisponible(columna);
+        if (fila !== -1) {
+            tablero[fila][columna] = jugadorActual;  // Registrar el jugador actual en la matriz
+            const celda = document.querySelector(`.celda[data-fila="${fila}"][data-columna="${columna}"]`);
+            celda.classList.add(jugadorActual);  // Añadir la clase visual del jugador
+
+            console.log(`Ficha colocada por ${jugadorActual} en fila: ${fila}, columna: ${columna}`);
+        } else {
+            console.log("Columna llena, elige otra.");
+        }
+    }
+
+ */
 });
 
 
