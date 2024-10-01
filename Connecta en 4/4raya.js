@@ -173,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Reiniciar el juego
     function reiniciarJuego() {
+        contadorEmpate = 0;
         tablero = Array(tamañoV).fill(null).map(() => Array(tamañoH).fill(null));
         crearTablero();
         jugadorActual = 'jugador1';
