@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let tamañoC;
     let tablero;
     let jugadorActual = 'jugador1';
+    let contadorEmpate;
     const jugadores = {
         jugador1: "",
         jugador2: ""
@@ -69,6 +70,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return -1;  // Si no hay fila disponible
     }
 
+    /* //Funcion pausar
+    function pausar(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function funcionPausa() {
+        console.log("Inicio de la función");
+
+        await pausar(5000);  // Pausa de medio segundo
+
+        console.log("Fin de la función");
+    } */
+
+
     // Colocar ficha en una columna
     function colocarFichaEnColumna(columna) {
         const fila = buscarFilaDisponible(columna);
@@ -77,12 +92,21 @@ document.addEventListener("DOMContentLoaded", () => {
             tablero[fila][columna] = jugadorActual;  // Registrar el jugador actual en la matriz
             const celda = document.querySelector(`.celda[data-fila="${fila}"][data-columna="${columna}"]`);
             celda.classList.add(jugadorActual);  // Añadir la clase visual del jugador
+            /* funcionPausa(); */
+            contadorEmpate--;
 
             console.log(`Ficha colocada por ${jugadorActual} en fila: ${fila}, columna: ${columna}`);
 
             // Verificar si hay un ganador
             if (verificarGanador(fila, columna)) {
                 alert(`${jugadores[jugadorActual]} ha ganado!`);
+                reiniciarJuego();
+                return;
+            }
+
+            //Verificar si hay empate
+            if (contadorEmpate == 0) {
+                alert(`Empate, no hay ganador`);
                 reiniciarJuego();
                 return;
             }
@@ -162,6 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Convertir los valores de los inputs a enteros
         tamañoH = parseInt(document.getElementById("tamañoH").value);
         tamañoV = parseInt(document.getElementById("tamañoV").value);
+
+        contadorEmpate = tamañoH * tamañoV;
 
         if (isNaN(tamañoH) || isNaN(tamañoV) || tamañoH <= 0 || tamañoV <= 0) {
             alert("Por favor, ingresa un tamaño válido para el tablero.");
@@ -256,6 +282,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 jugarConBot(); // Llamar nuevamente para el siguiente turno del bot
             }, 1000); // Retraso para simular el tiempo de pensar del bot
         }
+
+        setTimeout(() => 1000);
     }
 
     // Colocar ficha en columna
