@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fila = buscarFilaDisponible(columna);
 
         if (fila !== -1) {
-            tablero[fila][columna] = jugadorActual;  // Registrar el jugador actual en la matriz
+            tablero[fila][columna] = jugadorActual;  // Regisstrar el jugador actual en la matriz
             const celda = document.querySelector(`.celda[data-fila="${fila}"][data-columna="${columna}"]`);
             celda.classList.add(jugadorActual);  // Añadir la clase visual del jugador
             /* funcionPausa(); */
