@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#numerosColumnas {
+    display: grid;
+    grid-template-columns: repeat(15, 50px);
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.numeroColumna {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#tablero {
+    display: grid;
+    grid-template-columns: repeat(7, 50px);
+    grid-template-rows: repeat(6, 50px);
+    gap: 5px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.celda {
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+
+.celda.jugador1 {
+    background-color: red;
+}
+
+.celda.jugador2 {
+    background-color: yellow;
+}
+
+#jugadorActual {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+body {
+    font-family: sans-serif, sans-serif;
+    background-color: #f8f9fa;
+    margin: 20px;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    color: #007bff;
+}
+
+form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

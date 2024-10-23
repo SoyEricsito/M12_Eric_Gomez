@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 en Raya</title>
+    <link rel="stylesheet" href="4raya.css">
+</head>
+
+<body>
+    <h1>4 en Raya</h1>
+
+    <!-- Formulario de configuración -->
+    <form id="formularioJugadores">
+        <label for="jugador1">Jugador 1 (Rojo):</label>
+        <input type="text" id="jugador1" name="jugador1" required>
+        <br><br>
+        <label for="jugador2">Jugador 2 (Amarillo):</label>
+        <input type="text" id="jugador2" name="jugador2" required>
+        <br><br>
+        <label for="tamañoH">Tamaño Horizontal</label>
+        <input type="number" name="tamañoH" id="tamañoH" required>
+        <br><br>
+        <label for="tamañoV">Tamaño Vertical</label>
+        <input type="number" name="tamañoV" id="tamañoV" required>
+        <br><br>
+        <label for="colorJug1">Color Jugador 1</label>
+        <input type="color" name="colorJug1" id="colorJug1" value="red">
+        <br><br>
+        <label for="colorJug2">Color Jugador 1</label>
+        <input type="color" name="colorJug2" id="colorJug2" value="yellow">
+        <br><br>
+        <button type="submit">Iniciar Juego</button>
+        <button type="button" id="activarBot">Activar Bot (En desarrollo)</button>
+    </form>
+
+    <!-- Contenedor del juego -->
+    <div id="contenedorJuego" style="display:none;">
+        <div id="informacionJugador">
+            <span id="jugadorActual"></span>
+        </div>
+        <!-- Tablero del juego -->
+        <div class="tablero" id="tablero"></div>
+        <br>
+        <!-- Botón para volver al formulario -->
+        <button id="volverAtras">Volver</button>
+        <!-- Botón para mostrar numeros-->
+        <button id="alternarNumeros">Mostrar Números</button>
+
+    </div>
+
+    <script src="4raya.js"></script>
+</body>
+
+</html>
